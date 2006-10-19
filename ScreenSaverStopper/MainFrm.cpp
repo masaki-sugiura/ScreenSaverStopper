@@ -78,6 +78,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	}
 
+	if (bDisableAlwaysOnStart && m_bInitialStatus) {
+		hr = m_ssController.SetStatus(FALSE);
+		if (FAILED(hr)) {
+			TRACE0("Failed to SetStatus\n");
+			return -1;
+		}
+	}
+
 	m_uTaskBarCreatedMsg = ::RegisterWindowMessage(__TEXT("TaskbarCreated"));
 
 	return 0;
